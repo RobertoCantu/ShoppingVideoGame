@@ -291,6 +291,44 @@ export class SceneSetup {
 		);
 	}
 
+  loadShelves2() {
+		const loader = new GLTFLoader(this.loadingManager);
+		loader.load(
+			'./assets/models/modular_shelves/scene.gltf', // Path to your model
+			(gltf) => {
+				const shelves = gltf.scene;
+				shelves.scale.set(0.7, 0.7, 0.7); // Adjust size as needed
+				shelves.position.set(-200, 0, -1300); // Adjust position as needed
+				shelves.rotation.y = Math.PI / 2;
+				shelves.receiveShadow = true;
+				this.scene.add(shelves);
+			},
+			undefined,
+			(error) => {
+				console.error('Error loading shelves 2 model:', error);
+			}
+		);
+	}
+
+  loadPaintAisle() {
+		const loader = new GLTFLoader(this.loadingManager);
+		loader.load(
+			'./assets/models/paint_aisle/scene.gltf', // Path to your model
+			(gltf) => {
+				const paintAisle = gltf.scene;
+				paintAisle.scale.set(30, 30, 30); // Adjust size as needed
+				paintAisle.position.set(-200, 0, -1740); // Adjust position as needed
+				// paintAisle.rotation.y = Math.PI / 2;
+				paintAisle.receiveShadow = true;
+				this.scene.add(paintAisle);
+			},
+			undefined,
+			(error) => {
+				console.error('Error loading paint aisle:', error);
+			}
+		);
+	}
+
 	loadCashRegister(position, scale) {
 		const loader = new GLTFLoader(this.loadingManager);
 		loader.load(
@@ -422,6 +460,8 @@ export class SceneSetup {
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
 		this.loadParkingLot();
 		this.loadShelves();
+    this.loadShelves2();
+    this.loadPaintAisle();
 		this.loadMultipleCashRegisters();
 		this.loadCashier();
     this.setupLights();
