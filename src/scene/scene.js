@@ -232,7 +232,7 @@ export class SceneSetup {
 	// }
 
 	setupFloor() {
-		const texture = new THREE.TextureLoader(this.loadingManager).load('src/assets/textures/floor.jpg');
+		const texture = new THREE.TextureLoader(this.loadingManager).load('./assets/textures/floor.jpg');
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set(10, 10); // Adjust for a larger floor area
@@ -254,7 +254,7 @@ export class SceneSetup {
 	loadParkingLot() {
 		const loader = new GLTFLoader(this.loadingManager);
 		loader.load(
-			'src/assets/models/parking-lot/scene.gltf', // Path to your model
+			'/assets/models/parking-lot/scene.gltf', // Path to your model
 			(gltf) => {
 				const parkingLot = gltf.scene;
 				parkingLot.scale.set(1, 1, 1); // Adjust size as needed
@@ -275,7 +275,7 @@ export class SceneSetup {
 	loadShelves() {
 		const loader = new GLTFLoader(this.loadingManager);
 		loader.load(
-			'src/assets/models/modular_shelves/scene.gltf', // Path to your model
+			'./assets/models/modular_shelves/scene.gltf', // Path to your model
 			(gltf) => {
 				const shelves = gltf.scene;
 				shelves.scale.set(0.7, 0.7, 0.7); // Adjust size as needed
@@ -294,7 +294,7 @@ export class SceneSetup {
 	loadCashRegister(position, scale) {
 		const loader = new GLTFLoader(this.loadingManager);
 		loader.load(
-			'src/assets/models/SuperMarket/cash-register/cash-register.glb', // Path to your model
+			'./assets/models/SuperMarket/cash-register/cash-register.glb', // Path to your model
 			(gltf) => {
 				const cashRegister = gltf.scene;
 				cashRegister.scale.set(scale.x, scale.y, scale.z); // Use the passed scale
@@ -312,7 +312,7 @@ export class SceneSetup {
 	loadCashier() {
 		const loader = new GLTFLoader(this.loadingManager);
 		loader.load(
-			'src/assets/models/SuperMarket/cashier/character-employee.glb', // Path to your model
+			'./assets/models/SuperMarket/cashier/character-employee.glb', // Path to your model
 			(gltf) => {
 				const cashRegister = gltf.scene;
 				cashRegister.scale.set(100, 100, 100); // Use the passed scale
@@ -343,7 +343,7 @@ export class SceneSetup {
 		// const texture = new THREE.TextureLoader().load('../assets/textures/wall.jpg');
 
 		const texture = new THREE.TextureLoader(this.loadingManager).load(
-			'src/assets/textures/wall.jpg',
+			'./assets/textures/wall.jpg',
 			() => {
 				console.log('Texture loaded successfully');
 			},
@@ -388,7 +388,7 @@ export class SceneSetup {
 
 		// Add "Home Depot" text to the right wall
 		const fontLoader = new FontLoader(this.loadingManager);
-		fontLoader.load('src/assets/fonts/helvetiker_regular.typeface.json', (font) => {
+		fontLoader.load('./assets/fonts/helvetiker_regular.typeface.json', (font) => {
 			const textGeometry = new TextGeometry('Home Depot', {
 				font: font,
 				size: 40, // Adjust size as needed
