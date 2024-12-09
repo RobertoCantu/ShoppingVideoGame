@@ -7,7 +7,7 @@ export class Player {
         this.camera = camera;
         this.scene = scene;
         this.controls = new PointerLockControls(camera, document.body);
-        this.player = { height: 60, speed: 6 }; // Example player properties
+        this.player = { height: 30, speed: 4 }; // Example player properties
         this.keyboard = {};
         // this.lockPointer();
         this.initListeners();
@@ -40,6 +40,11 @@ export class Player {
             this.controls.moveRight(this.player.speed);
         }
     }
+
+    // Get the player's position from the camera
+    getPosition() {
+      return this.camera.position;
+  }
 
     lockPointer() {
         document.body.addEventListener('click', () => {
