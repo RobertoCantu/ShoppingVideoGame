@@ -3,10 +3,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Player } from '../player/player.js';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-// import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
-// import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader.js';
-// import { TDSLoader } from 'three/examples/jsm/loaders/TDSLoader.js';
-
 
 export class SceneSetup {
 	constructor(canvas, onLoadingChange) {
@@ -21,9 +17,7 @@ export class SceneSetup {
 			new THREE.Vector3(-250, 0, -514), // Min corner (left, bottom, back)
 			new THREE.Vector3(550, 200, -65) // Max corner (right, top, front)
 		);
-		// Add a grid helper
-		// const gridHelper = new THREE.GridHelper(1000, 20); // Size and divisions
-		// this.scene.add(gridHelper);
+		this.sound = null;
 
 		this.loadingManager.onLoad = () => {
 			onLoadingChange(false);
@@ -31,7 +25,7 @@ export class SceneSetup {
 		};
 
 		this.loadingManager.onProgress = (url, loaded, total) => {
-			console.log(`Loaded ${loaded}/${total}: ${url}`);
+			// console.log(`Loaded ${loaded}/${total}: ${url}`);
 		};
 		// this.setupGlassdoor();
 		this.init();
@@ -109,9 +103,15 @@ export class SceneSetup {
 		audioLoader.load('./assets/music/homeDepotSong.mp3', (buffer) => {
 			sound.setBuffer(buffer);
 			sound.setLoop(true);
-			sound.setVolume(0.5);
-			sound.play();
+			sound.setVolume(0.3);
+			this.sound = sound;
 		});
+	}
+
+	playMusic() {
+		if (this.sound) {
+			this.sound.play();
+		}
 	}
 
 	setupLights() {
@@ -343,28 +343,26 @@ export class SceneSetup {
 		});
 	}
 
-  setupGlassDoor() {
-    // Create the glass part of the door (transparent material)
-    const glassGeometry = new THREE.PlaneGeometry(50, 50); // Slightly smaller to fit inside the frame
-    const glassMaterial = new THREE.MeshPhongMaterial({
-        color: 0xadd8e6, // Light blue color for glass
-        opacity: 0.5, // Transparent glass
-        transparent: true,
-        reflectivity: 0.5, // Give it a shiny, reflective surface
-        shininess: 100,
-			  side: THREE.DoubleSide,
-        
-    });
-    const glassDoor = new THREE.Mesh(glassGeometry, glassMaterial);
+	setupGlassDoor() {
+		// Create the glass part of the door (transparent material)
+		const glassGeometry = new THREE.PlaneGeometry(50, 50); // Slightly smaller to fit inside the frame
+		const glassMaterial = new THREE.MeshPhongMaterial({
+			color: 0xadd8e6, // Light blue color for glass
+			opacity: 0.5, // Transparent glass
+			transparent: true,
+			reflectivity: 0.5, // Give it a shiny, reflective surface
+			shininess: 100,
+			side: THREE.DoubleSide,
+		});
+		const glassDoor = new THREE.Mesh(glassGeometry, glassMaterial);
 		glassDoor.rotation.y = -Math.PI / 2; // 90 degrees, make it flat
 
-    glassDoor.position.set(50, 0, -305); // Position the glass inside the frame
-    glassDoor.castShadow = true;
-    glassDoor.receiveShadow = true;
-    this.scene.add(glassDoor);
-}
+		glassDoor.position.set(50, 0, -305); // Position the glass inside the frame
+		glassDoor.castShadow = true;
+		glassDoor.receiveShadow = true;
+		this.scene.add(glassDoor);
+	}
 
- 
 	init() {
 		document.body.appendChild(this.renderer.domElement);
 		this.camera.position.set(270, this.player.player.height, -180);
@@ -372,7 +370,7 @@ export class SceneSetup {
 		this.camera.lookAt(-1800, 0, 0); // Ensure the camera looks at the scene center
 
 		this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.setupAudio();
+		this.setupAudio();
 		this.setupGradientSky();
 		this.loadParkingLot();
 		this.loadShelves();
@@ -383,7 +381,7 @@ export class SceneSetup {
 		this.setupLights();
 		this.setupFloor();
 		this.setupWalls();
-    this.setupGlassDoor();
+		this.setupGlassDoor();
 		this.animate();
 	}
 

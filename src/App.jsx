@@ -17,16 +17,26 @@ function App() {
   const handleStartButtonClick = () => {
     // Hide the overlay and start the scene or animation
     setIsOverlayVisible(false);
-    scene.player.lockPointer();
+     // Ensure audio is triggered after user interaction
+     if (scene) {
+      scene.playMusic(); // Call the audio setup from your SceneSetup instance
+      scene.player.lockPointer();
+    }
   };
+
+  
 
   return (
     <div className="App">
-      {isOverlayVisible && (
+       {isOverlayVisible && (
         <div id="startOverlay">
-          <button id="startButton" onClick={handleStartButtonClick} disabled={loading}>
-            Start
-          </button>
+          {loading ? (
+            <div className="loader">Loading...</div> // Show loader while loading
+          ) : (
+            <button id="startButton" onClick={handleStartButtonClick}>
+              Play
+            </button>
+          )}
         </div>
       )}
       <canvas ref={canvasRef} id="canvas"></canvas>
