@@ -7,7 +7,7 @@ export class Player {
         this.camera = camera;
         this.scene = scene;
         this.controls = new PointerLockControls(camera, document.body);
-        this.player = { height: 30, speed: 4 }; // Example player properties
+        this.player = { height: 18, speed: 0.6 }; // Example player properties
         this.keyboard = {};
         // this.lockPointer();
         this.initListeners();
