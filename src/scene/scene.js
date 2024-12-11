@@ -102,7 +102,7 @@ export class SceneSetup {
 		audioLoader.load('./assets/music/homeDepotSong.mp3', (buffer) => {
 			sound.setBuffer(buffer);
 			sound.setLoop(true);
-			sound.setVolume(0.3);
+			sound.setVolume(0.2);
 			this.sound = sound;
 		});
 	}
