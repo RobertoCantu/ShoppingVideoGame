@@ -1,4 +1,4 @@
-// player.js
+// player.js This file is for the player congig
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 
 
